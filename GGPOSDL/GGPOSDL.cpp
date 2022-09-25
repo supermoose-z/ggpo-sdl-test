@@ -143,12 +143,15 @@ public:
         ggpo_add_player(session, &remote, &remotePlayer);
 
         ggpo_set_frame_delay(session, localPlayer, 1);
+
+        status = GameStatus::Waiting;
     }
 
     // GGPO callbacks
     static bool begin_game(const char* game)
     {
-        main->status = GameStatus::Running;
+        cout << "Begin game called?" << endl;
+        //main->status = GameStatus::Running;
         return true;
     }
 
@@ -198,6 +201,8 @@ public:
 
     static bool on_event(GGPOEvent* info)
     {
+        cout << "Event received" << endl;
+
         switch (info->code)
         {
         case GGPO_EVENTCODE_CONNECTED_TO_PEER:
